@@ -1,0 +1,182 @@
+.index-page {
+    height: 100vh;
+    width: 100%;
+    background-color: #f7f7f7;
+}
+
+/* HEADER STYLE */
+
+.header {
+    position: fixed;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    
+    color: #f7f7f7;
+}
+
+.header-container .header-logo {
+    font-family: 'Kaushan Script', cursive !important;
+    font-size: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 200ms ease-in-out;
+    transition-property: transform;
+}
+
+.header-container .header-logo:hover {
+    transform: scale(1.05);
+}
+
+.header-container .header-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.header-container .header-nav .header-nav-link {
+    margin: 5px;
+    padding: 5px 10px;
+    opacity: .7;
+    letter-spacing: 0px;
+    word-spacing: 2px;
+    border: 2px solid #f0f0f044;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    transition-property: opacity;
+    user-select: none;
+}
+
+.header-container .header-nav .header-nav-link:hover {
+    opacity: 1;
+    border: 2px solid #f0f0f099;
+}
+
+/* SHOWCASE STYLE */
+
+.showcase {
+    height: 100%;
+    width: 100%;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #181818;
+}
+
+.showcase .showcase-slogan {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.showcase .showcase-slogan span {
+    color: #bd3636;
+    font-style: italic;
+}
+
+.showcase .showcase-description {
+    margin: 20px;
+    font-size: 1.6rem;
+    font-weight: 100;
+}
+
+/* LOG IN MODAL */
+
+.login-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000ee;
+    top: 0;
+    left: 0;
+}
+
+.login-modal .form-container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    background-color: #f7f7f7;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px #f7f7f744, 0px 0px 10px #f7f7f744;
+}
+
+.login-modal .form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.login-modal .form-container form .form-title {
+    color: #181818;
+    align-self: center;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+}
+
+.login-modal .form-container form .form-label {
+    width: 300px;
+    color: #181818;
+    margin-bottom: 3px;
+}
+
+.login-modal .form-container form .form-input {
+    padding: 5px;    
+    width: 300px;
+    margin-bottom: 20px;
+    color: #181818;
+    outline: none;
+    border: 2px solid #181818;
+}
+
+.login-modal .form-container form .form-submit {
+    border: none;
+    outline: none;
+    background-color: #bd3636bb;
+    border: 2px solid #181818;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #f7f7f7;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    transition-property: background-color;
+}
+
+.login-modal .form-container form .form-submit:hover {
+    background-color: #bd3636dd;
+}
+
+.login-modal .form-container form .form-submit:active {
+    transform: scale(1.02);
+}
+
+.login-modal .form-container form .new-account {
+    cursor: pointer;
+    color: #181818;
+    align-self: center;
+    margin-top: 30px;
+    font-size: .9rem;
+}
