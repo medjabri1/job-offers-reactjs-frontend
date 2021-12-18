@@ -1,7 +1,7 @@
 .index-page {
     height: 100vh;
     width: 100%;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7aa;
 }
 
 /* HEADER STYLE */
@@ -13,7 +13,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #181818;
+    background-color: #181818aa;
+    filter: invert(1);
+    box-shadow: 0px 0px 2px #f7f7f777, 0px 0px 10px #f7f7f777;
 }
 
 .header-container {
@@ -72,12 +74,14 @@
 .showcase {
     height: 100%;
     width: 100%;
+    padding: 30px;
     padding-top: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #181818;
+    text-align: center;
 }
 
 .showcase .showcase-slogan {
@@ -94,89 +98,109 @@
     margin: 20px;
     font-size: 1.6rem;
     font-weight: 100;
+    margin-bottom: 40;
 }
 
-/* LOG IN MODAL */
+/* LOADER */
 
-.login-modal {
+.loader {
+    z-index: 1000000;
     position: fixed;
-    height: 100%;
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 10000;
+    height: 100%;
+    background-color: #f7f7f7;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000ee;
+}
+
+.loader .loader-square {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #bd3636;
+    border-right: none;
+    border-left: none;
+    border-radius: 50%;
+    position: relative;
+    animation: loaderAnim 1500ms ease-in-out infinite alternate-reverse;
+}
+
+.loader .loader-square .dot-1, .loader .loader-square .dot-2 {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    border-radius: 50%;
+    height: 7px;
+    width: 7px;
+    transform: translateX(-50%);
+    background-color: #bd3636;
+}
+
+.loader .loader-square .dot-2 {
+    top: unset;
+    bottom: 4px;
+}
+
+@keyframes loaderAnim {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+/* Showcase action buttons */
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.action-buttons .action-button {
+    background-color: #18181899;
+    color: #f7f7f7;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 7px 20px;
+    border: 3px solid #181818;
+    margin: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: .85;
+}
+
+.action-buttons .action-button.signup {
+    background-color: #f7f7f799;
+    color: #181818;
+}
+
+.action-buttons .action-button:hover {
+    opacity: 1;
+}
+
+.action-buttons .action-button:focus {
+    transform: scale(1.03);
+}
+
+/* Background */
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
     top: 0;
     left: 0;
+    z-index: -100000;
 }
 
-.login-modal .form-container {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    width: fit-content;
-    background-color: #f7f7f7;
-    padding: 50px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 2px #f7f7f744, 0px 0px 10px #f7f7f744;
-}
-
-.login-modal .form-container form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.login-modal .form-container form .form-title {
-    color: #181818;
-    align-self: center;
-    margin-bottom: 30px;
-    text-transform: capitalize;
-}
-
-.login-modal .form-container form .form-label {
-    width: 300px;
-    color: #181818;
-    margin-bottom: 3px;
-}
-
-.login-modal .form-container form .form-input {
-    padding: 5px;    
-    width: 300px;
-    margin-bottom: 20px;
-    color: #181818;
-    outline: none;
-    border: 2px solid #181818;
-}
-
-.login-modal .form-container form .form-submit {
-    border: none;
-    outline: none;
-    background-color: #bd3636bb;
-    border: 2px solid #181818;
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: #f7f7f7;
-    cursor: pointer;
-    transition: all 200ms ease-in-out;
-    transition-property: background-color;
-}
-
-.login-modal .form-container form .form-submit:hover {
-    background-color: #bd3636dd;
-}
-
-.login-modal .form-container form .form-submit:active {
-    transform: scale(1.02);
-}
-
-.login-modal .form-container form .new-account {
-    cursor: pointer;
-    color: #181818;
-    align-self: center;
-    margin-top: 30px;
-    font-size: .9rem;
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(10px);
 }
