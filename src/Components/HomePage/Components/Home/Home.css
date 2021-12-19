@@ -1,0 +1,43 @@
+.home-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    padding-top: 70px;
+    background-color: #f7f7f7;
+    height: 100%;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.home-title {
+    padding: 50px;
+    padding-top: 30px;
+    word-spacing: 1px;
+}
+
+.paragraphs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+}
+
+.paragraphs p {
+    background-color: #e7e7e7;
+    padding: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+    opacity: .7;
+    transition: all 200ms ease-in-out;
+    transition-property: transform, border-radius;
+}
+
+.paragraphs p:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
