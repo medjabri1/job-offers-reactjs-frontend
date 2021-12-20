@@ -8,14 +8,15 @@
 
 .header {
     position: fixed;
-    height: 70px;
+    height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #181818aa;
+    background-color: #181818;
     filter: invert(1);
     box-shadow: 0px 0px 2px #f7f7f777, 0px 0px 10px #f7f7f777;
+    z-index: 1000;
 }
 
 .header-container {
@@ -32,7 +33,7 @@
 
 .header-container .header-logo {
     font-family: 'Kaushan Script', cursive !important;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     cursor: pointer;
     user-select: none;
     transition: all 200ms ease-in-out;
@@ -62,6 +63,9 @@
     transition: all 200ms ease-in-out;
     transition-property: opacity;
     user-select: none;
+
+    color: inherit !important;
+    text-decoration: none;
 }
 
 .header-container .header-nav .header-nav-link:hover {
