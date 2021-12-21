@@ -57,6 +57,12 @@
     text-transform: capitalize;
 }
 
+.signup-modal .form-container form .form-title .icon {
+    font-size: 3rem;
+    color: #bd3636;
+    opacity: .8;
+}
+
 .signup-modal .form-container form .form-label {
     width: fit-content;
     color: #181818;

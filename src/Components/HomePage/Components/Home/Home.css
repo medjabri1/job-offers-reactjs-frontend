@@ -79,7 +79,7 @@
     box-shadow: 0px 0px 2px #18181855, 0px 0px 6px #18181855;
     padding: 20px;
     border-radius: 3px;
-    transition: all 200ms ease-in-out;
+    transition: all 100ms ease-in-out;
     transition-property: transform, box-shadow;
     cursor: pointer;
     user-select: none;

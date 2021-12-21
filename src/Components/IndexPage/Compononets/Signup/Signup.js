@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+
 import axios from 'axios';
 
 import './Signup.css';
@@ -69,7 +73,10 @@ function Signup({ API_BASE_URL, gotoLogin, closeModal }) {
             <span className="modal-close-button" onClick={closeModal}>+</span>
             <div className="form-container">
                 <form onSubmit={handleSignupSubmit}>
-                    <h2 className="form-title">Sign up</h2>
+                    {/* <h2 className="form-title">Sign up</h2> */}
+                    <h2 className="form-title">
+                        <FontAwesomeIcon icon={faUserPlus} className="icon" />
+                    </h2>
 
                     <div className="form-input-box">
                         <div className="form-input-box-item">

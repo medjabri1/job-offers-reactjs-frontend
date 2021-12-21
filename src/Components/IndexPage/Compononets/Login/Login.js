@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+
 import axios from 'axios';
 
 import './Login.css';
@@ -62,7 +66,10 @@ function Login({ API_BASE_URL, gotoSignup, closeModal, setUserId }) {
             <span className="modal-close-button" onClick={closeModal}>+</span>
             <div className="form-container">
                 <form onSubmit={handleLoginSubmit}>
-                    <h2 className="form-title">Log in</h2>
+                    {/* <h2 className="form-title">Log in</h2> */}
+                    <h2 className="form-title">
+                        <FontAwesomeIcon icon={faSignInAlt} className="icon" />
+                    </h2>
                     <label htmlFor="login_email_input" className="form-label">Email</label>
                     <input
                         type="email"
