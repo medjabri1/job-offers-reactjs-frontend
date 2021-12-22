@@ -1,8 +1,16 @@
 import React from 'react'
+import { useEffect } from 'react'
 
 import "./Search.css";
 
 function Search() {
+
+    // Change page title
+
+    useEffect(() => {
+        document.title = "Job Offers - Search"
+    }, []);
+
     return (
         <div className="search-container">
 

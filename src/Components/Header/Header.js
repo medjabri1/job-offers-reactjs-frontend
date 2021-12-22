@@ -34,12 +34,6 @@ function Navbar() {
                 <div className="header-logo">Job Offers</div>
                 <ul className="header-nav">
 
-                    {/* Profile Link */}
-                    <Link className="header-nav-link" to="/home/">
-                        <FontAwesomeIcon icon={faUser} className="link-icon" />
-                        <span>Profile</span>
-                    </Link>
-
                     {/* Home Link */}
                     <Link className="header-nav-link" to="/home/">
                         <FontAwesomeIcon icon={faHome} className="link-icon" />
@@ -52,10 +46,16 @@ function Navbar() {
                         <span>Search</span>
                     </Link>
 
+                    {/* Profile Link */}
+                    <Link className="header-nav-link" to="/profile/">
+                        <FontAwesomeIcon icon={faUser} className="link-icon" />
+                        {/* <span>Profile</span> */}
+                    </Link>
+
                     {/* Log Out Link */}
                     <li className="header-nav-link" onClick={request_logout}>
                         <FontAwesomeIcon icon={faSignOutAlt} className="link-icon" />
-                        <span>Log out</span>
+                        {/* <span>Log out</span> */}
                     </li>
 
                     {/* <Link className="header-nav-link" to="/home/">Profile</Link>

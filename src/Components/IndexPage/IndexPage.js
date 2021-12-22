@@ -72,13 +72,12 @@ function IndexPage() {
                     setUserId(user_id);
                     setUserLogged(true);
                     navigate("/home");
-
                 } else {
                     setUserLogged(false);
                 }
                 setTimeout(() => {
                     setDisplayLoader(false);
-                }, 3000);
+                }, 1500);
             });
     }
 

@@ -1,8 +1,17 @@
 import React from 'react'
+import { useEffect } from 'react'
 
 import "./Home.css";
 
 function Home() {
+
+    // Change page title
+
+    useEffect(() => {
+        document.title = "Job Offers - Recent";
+    }, []);
+
+
     return (
         <div className="home-container">
             <div className="home-content">
