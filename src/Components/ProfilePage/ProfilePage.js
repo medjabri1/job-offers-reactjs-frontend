@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import Header from "../Header/Header";
 import Profile from "./Components/Profile/Profile";
+import Settings from "./Components/Settings/Settings";
 
 import "./ProfilePage.css";
 
@@ -59,7 +60,7 @@ function ProfilePage() {
             <Routes>
                 <Route path="/" element={<Profile loggedUserId={loggedUserId} />} />
                 <Route path="/:id" element={<Profile loggedUserId={loggedUserId} />} />
-                <Route path="/settings" element={<h2>Profile Settings</h2>} />
+                <Route path="/settings" element={<Settings loggedUserId={loggedUserId} />} />
                 <Route path="/*" element={<h2>Default route for Profile Page</h2>} />
             </Routes>
         </div>

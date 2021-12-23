@@ -1,7 +1,12 @@
 import React from 'react'
 
 import { useState, useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons'
 
 import axios from 'axios'
 
@@ -10,7 +15,8 @@ import "./Profile.css";
 function Profile({ loggedUserId }) {
 
     const API_BASE_URL = 'http://localhost:8081/api';
-    const profile_id = useParams().id;
+    let profile_id = useParams().id;
+    let navigate = useNavigate();
 
     // Change page title
 
@@ -21,6 +27,7 @@ function Profile({ loggedUserId }) {
 
     // Use State Hook
 
+    let [currentUser, setCurrentUser] = useState(true);
     let [currentUserName, setCurrentUserName] = useState("Full name");
     let [currentUserRole, setCurrentUserRole] = useState("USER");
     let [currentUserEmail, setCurrentUserEmail] = useState("Email address");
@@ -39,9 +46,11 @@ function Profile({ loggedUserId }) {
 
         if (profile_id == undefined || profile_id == loggedUserId) {
             // Profile for logged user
+            setCurrentUser(true);
             getProfileData(loggedUserId);
         } else {
             // Profile for another user
+            setCurrentUser(false);
             getProfileData(profile_id);
         }
     }
@@ -57,15 +66,30 @@ function Profile({ loggedUserId }) {
                     setCurrentUserName(user.firstName + " " + user.lastName);
                     setCurrentUserRole(user.role);
                     setCurrentUserEmail(user.email);
-                    setCurrentUserPhone("STATIC PHONE +212888");
-                    setCurrentUserLinkedIn("STATIC LINKEDIN LINK");
+                    setCurrentUserPhone("");
+                    setCurrentUserLinkedIn("");
                     setCurrentUserAge(getAge(user.birthDate));
-                    setCurrentUserPictureURL("STATIC PICTURE LINK");
+                    setCurrentUserPictureURL("");
                 } else {
                     console.log(res.data.error);
                 }
             });
     }
+
+    // Request log out
+
+    let request_logout = () => {
+
+        axios.post(`${API_BASE_URL}/user/logout`, {}, { withCredentials: true })
+            .then(res => {
+                console.log(res.data);
+            });
+
+        setTimeout(() => {
+            navigate("/");
+        }, 1000);
+
+    };
 
     // Calculate age by birth date
 
@@ -86,6 +110,7 @@ function Profile({ loggedUserId }) {
 
                 {/* ABOUT SECTION */}
                 <h2 className="profile-title about-title">About user</h2>
+
                 <div className="profile-header">
                     <div className="avatar-box">
                         <img className="user-avatar" src="https://avatars.githubusercontent.com/u/58910558?v=4" alt="Profile avatar" />
@@ -110,13 +135,13 @@ function Profile({ loggedUserId }) {
                         <div className="info-item">
                             <p className="infos-label">Phone number</p>
                             <p className="infos-data">
-                                <a href={"tel:" + currentUserPhone}>{currentUserPhone}</a>
+                                <a href={currentUserPhone != "" ? "tel:" + currentUserPhone : "#"}>{currentUserPhone != "" ? currentUserPhone : "NONE"}</a>
                             </p>
                         </div>
                         <div className="info-item">
                             <p className="infos-label">LinkedIn Profile</p>
                             <p className="infos-data">
-                                <a href={currentUserLinkedIn} target="_blank">LinkedIn profile link</a>
+                                <a href={currentUserLinkedIn != "" ? currentUserLinkedIn : "#"}>{currentUserLinkedIn != "" ? currentUserLinkedIn : "NONE"}</a>
                             </p>
                         </div>
                         <div className="info-item">
@@ -129,12 +154,37 @@ function Profile({ loggedUserId }) {
                 </div>
 
                 {/* RESUME SECTION */}
-                <h2 className="profile-title about-title">Resume section</h2>
+                <h2 className="profile-title">Resume section</h2>
 
-                <div className="profile-resume">
-                </div>
+                <div className="profile-resume"></div>
+
+
+                {/* PROFILE ACTIONS */}
+                {
+                    currentUser ?
+                        < h2 className="profile-title">Profile Settings</h2>
+                        : null
+                }
+
+                {
+                    currentUser ?
+                        <div className="profile-settings">
+                            {/* Profile Link */}
+                            <Link className="profile-settings-action" to="/profile/settings">
+                                <FontAwesomeIcon icon={faCog} className="action-icon" />
+                                <span>Settings</span>
+                            </Link>
+
+                            {/* Log Out Link */}
+                            <div className="profile-settings-action danger" onClick={request_logout}>
+                                <FontAwesomeIcon icon={faSignOutAlt} className="action-icon" />
+                                <span>Log out</span>
+                            </div>
+                        </div>
+                        : null
+                }
             </div>
-        </div>
+        </div >
     )
 }
 
