@@ -149,10 +149,26 @@
 }
 
 .settings-section .form .form-input.submit {
-    background-color: #bd3636cc;
+    background-color: #3440adcc;
     color: #f9f9f9;
     text-transform: uppercase;
     padding: 8px;
+    cursor: pointer;
+    opacity: .9;
+    transition: all 200ms ease-in-out;
+    transition-property: opacity;
+}
+
+.settings-section .form .form-input.submit.reset {
+    background-color: #bd3636cc;
+}
+
+.settings-section .form .form-input.submit:hover {
+    opacity: 1;
+}
+
+.settings-section .form .form-input.submit:active {
+    transform: scale(1.01);
 }
 
 .settings-section .request-response {

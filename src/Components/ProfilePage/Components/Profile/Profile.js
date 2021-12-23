@@ -14,6 +14,7 @@ import "./Profile.css";
 
 function Profile({ loggedUserId }) {
 
+    const EMPTY_AVATAR_URL = 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg';
     const API_BASE_URL = 'http://localhost:8081/api';
     let profile_id = useParams().id;
     let navigate = useNavigate();
@@ -66,10 +67,10 @@ function Profile({ loggedUserId }) {
                     setCurrentUserName(user.firstName + " " + user.lastName);
                     setCurrentUserRole(user.role);
                     setCurrentUserEmail(user.email);
-                    setCurrentUserPhone("");
-                    setCurrentUserLinkedIn("");
+                    setCurrentUserPhone(user.phone);
+                    setCurrentUserLinkedIn(user.linkedInUrl != null ? user.linkedInUrl : "");
                     setCurrentUserAge(getAge(user.birthDate));
-                    setCurrentUserPictureURL("");
+                    setCurrentUserPictureURL(user.pictureUrl != null ? user.pictureUrl : "");
                 } else {
                     console.log(res.data.error);
                 }
@@ -109,11 +110,11 @@ function Profile({ loggedUserId }) {
             <div className="profile-content">
 
                 {/* ABOUT SECTION */}
-                <h2 className="profile-title about-title">About user</h2>
+                <h2 className="profile-title about-title" onClick={() => { console.log(currentUserPictureURL) }}>About user</h2>
 
                 <div className="profile-header">
                     <div className="avatar-box">
-                        <img className="user-avatar" src="https://avatars.githubusercontent.com/u/58910558?v=4" alt="Profile avatar" />
+                        <img className="user-avatar" src={currentUserPictureURL != "" ? currentUserPictureURL : EMPTY_AVATAR_URL} alt="Profile avatar" />
                     </div>
                     <div className="infos-box">
                         <div className="info-item">
@@ -141,7 +142,7 @@ function Profile({ loggedUserId }) {
                         <div className="info-item">
                             <p className="infos-label">LinkedIn Profile</p>
                             <p className="infos-data">
-                                <a href={currentUserLinkedIn != "" ? currentUserLinkedIn : "#"}>{currentUserLinkedIn != "" ? currentUserLinkedIn : "NONE"}</a>
+                                <a href={currentUserLinkedIn != "" ? currentUserLinkedIn : "#"}>{currentUserLinkedIn != "" ? "LinkedIn Profile" : "NONE"}</a>
                             </p>
                         </div>
                         <div className="info-item">
