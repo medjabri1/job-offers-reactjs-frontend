@@ -1,24 +1,22 @@
 import React from 'react'
 
-import { useState, useEffect } from 'react'
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
-import axios from 'axios'
+import axios from 'axios';
 
-import Header from "../Header/Header";
-import Profile from "./Components/Profile/Profile";
-import Settings from "./Components/Settings/Settings";
+import "./RecruiterPage.css";
 
-import "./ProfilePage.css";
+import Header from './../Header/Header';
+import RecruiterPanel from './Components/RecruiterPanel/RecruiterPanel';
 
-function ProfilePage() {
+function RecruiterPage() {
 
     const API_BASE_URL = 'http://localhost:8081/api';
     let navigate = useNavigate();
 
     let [displayLoader, setDisplayLoader] = useState(true);
-    let [loggedUserId, setLoggedUserId] = useState(0);
-    let [loggedUserRole, setLoggedUserRole] = useState("worker");
+    let [recruiterId, setRecruiterId] = useState(0);
 
     useEffect(() => {
         checkLoginStatus();
@@ -34,11 +32,16 @@ function ProfilePage() {
 
                 if (user_id != "null") {
                     // USER LOGGED IN
-                    setTimeout(() => {
-                        setDisplayLoader(false);
-                        setLoggedUserId(user_id);
-                        setLoggedUserRole(user_role);
-                    }, 1000);
+                    if (user_role == "recruiter") {
+                        // USER IS A RECRUITER
+                        setRecruiterId(user_id);
+                        setTimeout(() => {
+                            setDisplayLoader(false);
+                        }, 1000);
+                    } else {
+                        // USER IS NOT A RECRUITER
+                        navigate("/home");
+                    }
                 } else {
                     navigate("/");
                 }
@@ -46,8 +49,7 @@ function ProfilePage() {
     }
 
     return (
-        <div className="profile-page">
-
+        <div className="recruiter-page">
             {/* LOADING */}
             {
                 displayLoader ?
@@ -62,13 +64,10 @@ function ProfilePage() {
 
             <Header />
             <Routes>
-                <Route path="/" element={<Profile loggedUserId={loggedUserId} loggedUserRole={loggedUserRole} />} />
-                <Route path="/:id" element={<Profile loggedUserId={loggedUserId} loggedUserRole={loggedUserRole} />} />
-                <Route path="/settings" element={<Settings loggedUserId={loggedUserId} />} />
-                <Route path="/*" element={<h2>Default route for Profile Page</h2>} />
+                <Route path="/" element={<RecruiterPanel currentRecruiter={recruiterId} />} />
             </Routes>
         </div>
     )
 }
 
-export default ProfilePage
+export default RecruiterPage

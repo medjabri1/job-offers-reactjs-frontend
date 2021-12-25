@@ -12,7 +12,7 @@ import axios from 'axios'
 
 import "./Profile.css";
 
-function Profile({ loggedUserId }) {
+function Profile({ loggedUserId, loggedUserRole }) {
 
     const EMPTY_AVATAR_URL = 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg';
     const API_BASE_URL = 'http://localhost:8081/api';
@@ -109,8 +109,21 @@ function Profile({ loggedUserId }) {
         <div className="profile-container">
             <div className="profile-content">
 
+                {/* RECRUITER SECTION */}
+                {
+                    loggedUserRole == "recruiter" ?
+                        <div className="profile-settings">
+                            {/* Manage offers */}
+                            <Link className="profile-settings-action" to="/recruiter/">
+                                <FontAwesomeIcon icon={faCog} className="action-icon" />
+                                <span>Recruiter Panel</span>
+                            </Link>
+                        </div>
+                        : null
+                }
+
                 {/* ABOUT SECTION */}
-                <h2 className="profile-title about-title" onClick={() => { console.log(currentUserPictureURL) }}>About user</h2>
+                <h2 className="profile-title about-title">About user</h2>
 
                 <div className="profile-header">
                     <div className="avatar-box">
@@ -136,7 +149,7 @@ function Profile({ loggedUserId }) {
                         <div className="info-item">
                             <p className="infos-label">Phone number</p>
                             <p className="infos-data">
-                                <a href={currentUserPhone != "" ? "tel:" + currentUserPhone : "#"}>{currentUserPhone != "" ? currentUserPhone : "NONE"}</a>
+                                <a href={currentUserPhone != "" ? "tel:" + currentUserPhone : "#"}>{currentUserPhone != null ? currentUserPhone : "NONE"}</a>
                             </p>
                         </div>
                         <div className="info-item">
@@ -158,7 +171,6 @@ function Profile({ loggedUserId }) {
                 <h2 className="profile-title">Resume section</h2>
 
                 <div className="profile-resume"></div>
-
 
                 {/* PROFILE ACTIONS */}
                 {
