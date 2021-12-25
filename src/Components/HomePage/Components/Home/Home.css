@@ -71,6 +71,15 @@
     grid-gap: 30px;
 }
 
+.categories-container .category .category-offers .no-offers-message {
+    /* border: 2px solid #181818; */
+    grid-column: span 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 30px;
+}
+
 .categories-container .category .category-offers .offer-item {
     display: flex;
     flex-direction: column;

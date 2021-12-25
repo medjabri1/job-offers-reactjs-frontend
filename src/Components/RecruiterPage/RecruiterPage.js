@@ -9,6 +9,7 @@ import "./RecruiterPage.css";
 
 import Header from './../Header/Header';
 import RecruiterPanel from './Components/RecruiterPanel/RecruiterPanel';
+import OffersManager from './Components/OffersManager/OffersManager';
 
 function RecruiterPage() {
 
@@ -64,7 +65,9 @@ function RecruiterPage() {
 
             <Header />
             <Routes>
-                <Route path="/" element={<RecruiterPanel currentRecruiter={recruiterId} />} />
+                <Route path="/" element={<RecruiterPanel currentRecruiterId={recruiterId} />} />
+                <Route path="/*" element={<RecruiterPanel currentRecruiterId={recruiterId} />} />
+                <Route path="/offers-manager" element={<OffersManager currentRecruiterId={recruiterId} />} />
             </Routes>
         </div>
     )
