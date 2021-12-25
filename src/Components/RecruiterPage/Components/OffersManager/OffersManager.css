@@ -1,4 +1,4 @@
-.recruiter-panel-container {
+.offers-manager-container {
     width: 100%;
     max-width: 1300px;
     margin: auto;
@@ -6,9 +6,10 @@
     background-color: #f7f7f7;
     height: 100%;
     min-height: 100vh;
+    position: relative;
 }
 
-.recruiter-panel-content {
+.offers-manager-content {
     max-width: 900px;
     margin: auto;
     display: flex;
@@ -18,13 +19,13 @@
     padding: 20px;
 }
 
-.panel-title {
+.manager-title {
     font-size: 1.6rem;
     margin-bottom: 30px;
     position: relative;
 }
 
-.panel-title::before, .panel-title::after {
+.manager-title::before, .manager-title::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -37,11 +38,25 @@
     /* border: 2px dashed #181818; */
 }
 
-.panel-title::before {
+.manager-title::before {
     left: calc(100% + 70px);
 }
 
-.panel-section {
+.response-message {
+    color: #181818;
+    background-color: #18181822;
+    padding: 20px 50px;
+    margin: 10px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 900;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.manager-section {
     width: 100%;
     height: fit-content;
     display: flex;
@@ -56,14 +71,14 @@
     position: relative;
 }
 
-.panel-section .section-title {
+.manager-section .section-title {
     font-size: 1.2rem;
     align-self: flex-start;
     margin: 0px 0px 20px 40px;
     position: relative;
 }
 
-.panel-section .section-title::before, .panel-section .section-title::after {
+.manager-section .section-title::before, .manager-section .section-title::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -75,82 +90,19 @@
     background-color: #181818;
 }
 
-.panel-section .section-title::before {
+.manager-section .section-title::before {
     left: -30px;
 }
 
-.overview-container {
-    width: 100%;
-    height: fit-content;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-}
+/* QUICK ACTIONS */
 
-.overview-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 2px #18181877, 0px 0px 6px #18181877;
-    border-radius: 3px;
-    overflow: hidden;
-    cursor: pointer;
-    opacity: .9;
-    transition: all 100ms ease-in-out;
-    transition-property: opacity, transform;
-}
-
-.overview-item:hover {
-    opacity: 1;
-    transform: scale(1.03);
-    filter: blur(0px);
-}
-
-.overview-item .icon {
-    height: 100%;
-    width: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    padding: 8px 16px;
-    background-color: #584566cc;
-    color: #f9f9f9;
-}
-
-.overview-item:nth-child(odd) .icon {
-    background-color: #221c22cc;
-}
-
-.overview-item .content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 8px 12px;
-}
-
-.overview-item .content .item-title {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.overview-item .content .item-data {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #181818;
-}
-
-/* ACTIONS SECTION */
-
-.actions-container {
+.quick-actions {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.actions-container .action-item {
+.quick-actions .action-item {
     /* width: 100%; */
     display: flex;
     flex-direction: row;
@@ -170,12 +122,12 @@
     user-select: none;
 }
 
-.actions-container .action-item:hover {
+.quick-actions .action-item:hover {
     opacity: 1;
     border: 2px solid #181818;
 }
 
-.actions-container .action-item .action-icon {
+.quick-actions .action-item .action-icon {
     margin-right: 5px;
     font-size: 1.2rem;
 }
