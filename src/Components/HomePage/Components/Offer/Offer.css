@@ -1,0 +1,114 @@
+.offer-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    padding: 120px 0px;
+    background-color: #f7f7f7;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.offer-container .offer-content {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: flex-start;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.offer-container .offer-title {
+    word-spacing: 1px;
+    align-self: flex-start;
+    font-size: 2rem;
+    position: relative;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.offer-container .offer-title::before, .offer-container .offer-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translate(-50%, -50%);
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background-color: #181818;
+}
+
+.offer-container .offer-title::before {
+    left: -30px;
+}
+
+.offer-container .offer-data-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+}
+
+.offer-container .offer-infos {
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.offer-container .offer-infos span {
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.offer-container .offer-description {
+    margin: 50px 0px;
+    line-height: 2rem;
+    text-align: justify;
+}
+
+.apply-section {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.apply-section .apply-button {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    background-color: #bd3636;
+    border: 2px solid #181818;
+    color: #f7f7f7 !important;
+    text-transform: uppercase;
+    opacity: .9;
+    transition: all 200ms ease-in-out;
+    transition-property: opacity;
+    user-select: none;
+    cursor: pointer;
+}
+
+.apply-section .apply-button .action-icon {
+    font-size: 1.5rem;
+    margin-left: 5px;
+}
+
+.apply-section .apply-button:hover {
+    opacity: 1;
+}
+
+.apply-section .apply-button:active {
+    transform: scale(1.02);
+}
+
+.offer-container .response-message {
+    margin: auto;
+    margin-top: 30px;
+}

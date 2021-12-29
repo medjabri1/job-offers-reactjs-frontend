@@ -2,6 +2,8 @@ import React from 'react'
 
 import { useState, useEffect } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import axios from 'axios';
 
 import "./Home.css";
@@ -115,14 +117,14 @@ function Home() {
                                             :
                                             category.map((offer, offer_index) => (
 
-                                                <div className="offer-item" key={offer_index}>
+                                                <Link className="offer-item" key={offer_index} to={"/home/offer/" + offer.id}>
                                                     <h2 className="offer-title">{offer.title}</h2>
                                                     <h3 className="company-name">{offer.companyName} - <span>{offer.city}, {offer.country}</span></h3>
                                                     <p className="offer-description">
                                                         {offer.description.substring(1, 80)}..
                                                     </p>
                                                     <span className="published-ago">{timeSince(offer.createdAt)} ago</span>
-                                                </div>
+                                                </Link>
 
                                             ))
                                     }
