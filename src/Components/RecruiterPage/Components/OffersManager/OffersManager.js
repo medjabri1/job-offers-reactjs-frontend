@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import "./OffersManager.css";
 
@@ -23,11 +23,22 @@ function OffersManager({ currentRecruiterId }) {
     let [displayCreateNewOffer, setDisplayNewOffer] = useState(false);
     let [responseMessage, setResponseMessage] = useState("");
 
+    let [openOffers, setOpenOffers] = useState([]);
+    let [closedOffers, setClosedOffers] = useState([]);
+
+    let [noOpenOfferMessage, setNoOpenOffersMessage] = useState("");
+    let [noClosedOfferMessage, setNoClosedOffersMessage] = useState("");
+
     // USE EFFECT HOOK
 
     useEffect(() => {
         document.title = "Offers Managers"
     }, []);
+
+    useEffect(() => {
+        requestOffers(0);
+        requestOffers(1);
+    }, [currentRecruiterId]);
 
     // SUBMIT POST NEW OFFER
 
@@ -41,6 +52,7 @@ function OffersManager({ currentRecruiterId }) {
                 if (data.status == "1") {
                     // OFFER POSTED SUCCESSFULLY
                     setResponseMessage("Offer posted successfully");
+                    requestOffers(0);
                 } else {
                     // SOME ERROR OCCURED
                     setResponseMessage(res.data.error);
@@ -49,6 +61,34 @@ function OffersManager({ currentRecruiterId }) {
             });
 
     };
+
+    // REQUEST OPEN OFFERS
+
+    let requestOffers = (closed) => {
+
+        if (closed == null || closed == undefined) {
+            return
+        }
+
+        axios.get(`${API_BASE_URL}/recruiter/all-offers?recruiter_id=${currentRecruiterId}&closed=${closed}`, { withCredentials: true })
+            .then(res => {
+
+                let { status } = res.data;
+
+                if (status == "1") {
+                    if (closed == 0) {
+                        setOpenOffers(Object.values(res.data.offers));
+                    } else if (closed == 1) {
+                        setClosedOffers(Object.values(res.data.offers));
+                    }
+
+                } else {
+                    console.log(res.data.error);
+                }
+
+            });
+
+    }
 
     return (
         <div className="offers-manager-container">
@@ -85,7 +125,44 @@ function OffersManager({ currentRecruiterId }) {
                     <h2 className="section-title">Open Offers</h2>
 
                     <div className="section-content">
-                        here goes open offers
+                        {
+                            openOffers.length == 0 ?
+                                <p className="no-offers">No open offers with this user</p>
+                                :
+                                <div className="offers-container">
+                                    <div className="offers-header">
+                                        <span>Title</span>
+                                        <span>Creation date</span>
+                                        <span>Actions</span>
+                                    </div>
+                                    {
+                                        openOffers.map((offer, index) => (
+                                            <div className="offer-item" key={index}>
+
+                                                <Link to={"/home/offer/" + offer.id}>
+                                                    <h2 className="offer-title">{offer.title.substring(0, 20)}</h2>
+                                                </Link>
+
+                                                <p className="offer-created-at">{offer.createdAt.replace('T', '').substr(0, offer.createdAt.length - 4)}</p>
+                                                <div className="offer-actions">
+                                                    <Link className="offer-action-item" to={"/recruiter/offers-manager/view/" + offer.id}>
+                                                        <FontAwesomeIcon icon={faEye} className="action-icon" />
+                                                        <span>View</span>
+                                                    </Link>
+                                                    <Link className="offer-action-item" to={"/recruiter/offers-manager/edit/" + offer.id}>
+                                                        <FontAwesomeIcon icon={faEdit} className="action-icon" />
+                                                        <span>Edit</span>
+                                                    </Link>
+                                                    <div className="offer-action-item">
+                                                        <FontAwesomeIcon icon={faTrash} className="action-icon" />
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                        }
                     </div>
                 </div>
 
@@ -93,7 +170,44 @@ function OffersManager({ currentRecruiterId }) {
                     <h2 className="section-title">Closed Offers</h2>
 
                     <div className="section-content">
-                        here goes closed offers
+                        {
+                            closedOffers.length == 0 ?
+                                <p className="no-offers">No closed offers with this user</p>
+                                :
+                                <div className="offers-container">
+                                    <div className="offers-header">
+                                        <span>Title</span>
+                                        <span>Creation date</span>
+                                        <span>Actions</span>
+                                    </div>
+                                    {
+                                        closedOffers.map((offer, index) => (
+                                            <div className="offer-item" key={index}>
+
+                                                <Link to={"/home/offer/" + offer.id}>
+                                                    <h2 className="offer-title">{offer.title.substring(0, 20)}</h2>
+                                                </Link>
+
+                                                <p className="offer-created-at">{offer.createdAt.replace('T', '').substr(0, offer.createdAt.length - 4)}</p>
+                                                <div className="offer-actions">
+                                                    <Link className="offer-action-item" to={"/recruiter/offers-manager/view/" + offer.id}>
+                                                        <FontAwesomeIcon icon={faEye} className="action-icon" />
+                                                        <span>View</span>
+                                                    </Link>
+                                                    <Link className="offer-action-item" to={"/recruiter/offers-manager/edit/" + offer.id}>
+                                                        <FontAwesomeIcon icon={faEdit} className="action-icon" />
+                                                        <span>Edit</span>
+                                                    </Link>
+                                                    <div className="offer-action-item">
+                                                        <FontAwesomeIcon icon={faTrash} className="action-icon" />
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                        }
                     </div>
                 </div>
 

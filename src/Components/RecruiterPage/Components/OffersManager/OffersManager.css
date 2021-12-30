@@ -94,6 +94,14 @@
     left: -30px;
 }
 
+.manager-section .section-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 /* QUICK ACTIONS */
 
 .quick-actions {
@@ -130,4 +138,82 @@
 .quick-actions .action-item .action-icon {
     margin-right: 5px;
     font-size: 1.2rem;
+}
+
+.manager-section .offers-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.manager-section .offers-container .offers-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #181818;
+    font-weight: 900;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.manager-section .offers-container .offers-header span {
+    width: 100%;
+}
+
+.manager-section .offers-container .offer-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0px;
+    padding: 10px 10px;
+    box-shadow: 0px 0px 2px #18181844;
+    opacity: .9;
+}
+
+.manager-section .offers-container .offer-item > * {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.manager-section .offers-container .offer-item .offer-title {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.manager-section .offers-container .offer-item .offer-action-item {
+    background-color: #18181822;
+    border: 2px solid #181818;
+    padding: 5px;
+    text-align: center;
+    margin: 0px 5px;
+    user-select: none;
+    width: max-content !important;
+    opacity: .85;
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.manager-section .offers-container .offer-item .offer-action-item:hover {
+    opacity: 1;
+}
+
+.manager-section .offers-container .offer-item .offer-action-item:active {
+    transform: scale(1.02);
+}
+
+.manager-section .offers-container .offer-item .offer-action-item .action-icon {
+    margin-right: 5px;
+    font-size: 1rem  !important;
+}
+
+.manager-section .offers-container .offer-item:hover {
+    opacity: 1;
+    transform: scale(1.02);
 }

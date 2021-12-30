@@ -121,7 +121,7 @@ function Home() {
                                                     <h2 className="offer-title">{offer.title}</h2>
                                                     <h3 className="company-name">{offer.companyName} - <span>{offer.city}, {offer.country}</span></h3>
                                                     <p className="offer-description">
-                                                        {offer.description.substring(1, 80)}..
+                                                        {offer.description.substring(0, 80)}..
                                                     </p>
                                                     <span className="published-ago">{timeSince(offer.createdAt)} ago</span>
                                                 </Link>
