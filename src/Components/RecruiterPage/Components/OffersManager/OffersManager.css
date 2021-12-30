@@ -172,7 +172,14 @@
     margin: 5px 0px;
     padding: 10px 10px;
     box-shadow: 0px 0px 2px #18181844;
-    opacity: .9;
+    opacity: .6;
+    transition: all 200ms ease-in-out;
+    transition-property: opacity, transform;
+}
+
+.manager-section .offers-container .offer-item:hover {
+    opacity: 1;
+    transform: scale(1.02);
 }
 
 .manager-section .offers-container .offer-item > * {
@@ -211,9 +218,4 @@
 .manager-section .offers-container .offer-item .offer-action-item .action-icon {
     margin-right: 5px;
     font-size: 1rem  !important;
-}
-
-.manager-section .offers-container .offer-item:hover {
-    opacity: 1;
-    transform: scale(1.02);
 }
