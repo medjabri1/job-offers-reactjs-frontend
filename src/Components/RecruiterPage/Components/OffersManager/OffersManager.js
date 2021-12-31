@@ -14,6 +14,8 @@ import "./OffersManager.css";
 
 import NewOffer from '../NewOffer/NewOffer';
 import EditOffer from '../EditOffer/EditOffer';
+import ViewOffer from '../ViewOffer/ViewOffer';
+import DeleteOffer from '../DeleteOffer/DeleteOffer';
 
 function OffersManager({ currentRecruiterId }) {
 
@@ -23,7 +25,12 @@ function OffersManager({ currentRecruiterId }) {
     // USE STATE HOOK
     let [displayCreateNewOffer, setDisplayCreateNewOffer] = useState(false);
     let [displayEditOffer, setDisplayEditOffer] = useState(false);
+    let [displayViewOffer, setDisplayViewOffer] = useState(false);
+    let [displayDeleteOffer, setDisplayDeleteOffer] = useState(false);
+
     let [currentOfferEdit, setCurrentOfferEdit] = useState({});
+    let [currentOfferView, setCurrentOfferView] = useState({});
+    let [currentOfferDelete, setCurrentOfferDelete] = useState({});
 
     let [responseMessage, setResponseMessage] = useState("");
 
@@ -116,12 +123,46 @@ function OffersManager({ currentRecruiterId }) {
 
     }
 
+    // REQUEST DELETE OFFER
+
+    let requestDeleteOffer = () => {
+
+
+        axios.delete(`${API_BASE_URL}/offer/delete/?id=${currentOfferDelete.id}`, { withCredentials: true })
+            .then((res) => {
+
+                let { status } = res.data;
+
+                if (status == "1") {
+
+                } else {
+
+                }
+
+            });
+
+    }
+
     // SHOW EDIT OFFER
 
     let showEditOffer = (offer) => {
         setCurrentOfferEdit(offer);
         setDisplayEditOffer(true);
-    }
+    };
+
+    // SHOW VIEW OFFER
+
+    let showViewOffer = (offer) => {
+        setCurrentOfferView(offer);
+        setDisplayViewOffer(true);
+    };
+
+    // SHOW DELETE OFFER
+
+    let showDeleteOffer = (offer) => {
+        setCurrentOfferDelete(offer);
+        setDisplayDeleteOffer(true);
+    };
 
     return (
         <div className="offers-manager-container">
@@ -145,6 +186,29 @@ function OffersManager({ currentRecruiterId }) {
                         editOffer={requestEditOffer}
                         currentOffer={currentOfferEdit}
                         closeModal={() => { setDisplayEditOffer(false) }}
+                    />
+                    : null
+            }
+
+            {/* VIEW OFFER COMPONENT */}
+            {
+                displayViewOffer ?
+                    <ViewOffer
+                        currentRecruiterId={currentRecruiterId}
+                        currentOffer={currentOfferView}
+                        closeModal={() => { setDisplayViewOffer(false) }}
+                    />
+                    : null
+            }
+
+            {/* DELETE OFFER COMPONENT */}
+            {
+                displayDeleteOffer ?
+                    <DeleteOffer
+                        currentRecruiterId={currentRecruiterId}
+                        currentOffer={currentOfferDelete}
+                        deleteOffer={requestDeleteOffer}
+                        closeModal={() => { setDisplayDeleteOffer(false) }}
                     />
                     : null
             }
@@ -190,15 +254,15 @@ function OffersManager({ currentRecruiterId }) {
 
                                                 <p className="offer-created-at">{offer.createdAt.replace('T', '').substr(0, offer.createdAt.length - 4)}</p>
                                                 <div className="offer-actions">
-                                                    <Link className="offer-action-item" to={"/recruiter/offers-manager/view/" + offer.id}>
+                                                    <div className="offer-action-item" onClick={() => { showViewOffer(offer) }}>
                                                         <FontAwesomeIcon icon={faEye} className="action-icon" />
                                                         <span>View</span>
-                                                    </Link>
+                                                    </div>
                                                     <div className="offer-action-item" onClick={() => { showEditOffer(offer) }}>
                                                         <FontAwesomeIcon icon={faEdit} className="action-icon" />
                                                         <span>Edit</span>
                                                     </div>
-                                                    <div className="offer-action-item">
+                                                    <div className="offer-action-item" onClick={() => { showDeleteOffer(offer) }}>
                                                         <FontAwesomeIcon icon={faTrash} className="action-icon" />
                                                         <span>Delete</span>
                                                     </div>
@@ -235,15 +299,15 @@ function OffersManager({ currentRecruiterId }) {
 
                                                 <p className="offer-created-at">{offer.createdAt.replace('T', '').substr(0, offer.createdAt.length - 4)}</p>
                                                 <div className="offer-actions">
-                                                    <Link className="offer-action-item" to={"/recruiter/offers-manager/view/" + offer.id}>
+                                                    <div className="offer-action-item" onClick={() => { showViewOffer(offer) }}>
                                                         <FontAwesomeIcon icon={faEye} className="action-icon" />
                                                         <span>View</span>
-                                                    </Link>
+                                                    </div>
                                                     <div className="offer-action-item" onClick={() => { showEditOffer(offer) }}>
                                                         <FontAwesomeIcon icon={faEdit} className="action-icon" />
                                                         <span>Edit</span>
                                                     </div>
-                                                    <div className="offer-action-item">
+                                                    <div className="offer-action-item" onClick={() => { showDeleteOffer(offer) }}>
                                                         <FontAwesomeIcon icon={faTrash} className="action-icon" />
                                                         <span>Delete</span>
                                                     </div>
