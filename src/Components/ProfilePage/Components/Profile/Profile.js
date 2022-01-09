@@ -36,6 +36,7 @@ function Profile({ loggedUserId, loggedUserRole }) {
     let [currentUserLinkedIn, setCurrentUserLinkedIn] = useState("LinkedIn Profile");
     let [currentUserAge, setCurrentUserAge] = useState("00");
     let [currentUserPictureURL, setCurrentUserPictureURL] = useState("");
+    let [currentUserResumeLink, setCurrentUserResumeLink] = useState("");
 
     let [fetchId, setFetchId] = useState(loggedUserId);
 
@@ -71,6 +72,8 @@ function Profile({ loggedUserId, loggedUserRole }) {
                     setCurrentUserLinkedIn(user.linkedInUrl != null ? user.linkedInUrl : "");
                     setCurrentUserAge(getAge(user.birthDate));
                     setCurrentUserPictureURL(user.pictureUrl != null ? user.pictureUrl : "");
+                    setCurrentUserResumeLink(user.resumePath != null ? API_BASE_URL + "/file/" + user.resumePath : "");
+                    console.log(user);
                 } else {
                     console.log(res.data.error);
                 }
@@ -170,7 +173,23 @@ function Profile({ loggedUserId, loggedUserRole }) {
                 {/* RESUME SECTION */}
                 <h2 className="profile-title">Resume section</h2>
 
-                <div className="profile-resume"></div>
+                <div className="profile-resume" style={{ width: 100 + '%' }}>
+
+                    {
+                        currentUserResumeLink != "" ?
+
+                            <iframe
+                                src={currentUserResumeLink}
+                                frameBorder="0"
+                                style={{ width: 100 + '%', minHeight: 1100 + 'px' }}
+                            ></iframe>
+
+                            :
+                            <p>No resume is set for this account</p>
+
+                    }
+
+                </div>
 
                 {/* PROFILE ACTIONS */}
                 {

@@ -37,6 +37,9 @@ function Settings({ loggedUserId }) {
     let [formNewPassword, setFormNewPassword] = useState("");
     let [formConfirmPassword, setFormConfirmPassword] = useState("");
 
+    let [formResumeFile, setFormResumeFile] = useState(null);
+    let [userResumeLink, setUserResumeLink] = useState("");
+
     let [formInfosResponse, setFormInfosResponse] = useState("");
     let [formPasswordResponse, setFormPasswordResponse] = useState("");
     let [formResumeResponse, setFormResumeResponse] = useState("");
@@ -67,6 +70,7 @@ function Settings({ loggedUserId }) {
                     setFormBirthDate(user.birthDate);
                     setFormLinkedInURL(user.linkedInUrl != null ? user.linkedInUrl : "");
                     setFormPictureURL(user.pictureUrl != null ? user.pictureUrl : "");
+                    setUserResumeLink(user.resumePath != null ? API_BASE_URL + "/file/" + user.resumePath : "");
                 } else {
                     console.log(res.data.error);
                 }
@@ -154,6 +158,46 @@ function Settings({ loggedUserId }) {
                     setFormPasswordResponse(res.data.error);
                 }
             });
+    };
+
+    // REQUEST UPDATE RESUME
+
+    let requestUpdateResume = () => {
+        if (formResumeFile != null) {
+            // FILE INPUT IS SET
+
+            let request_data = {
+                resume: formResumeFile
+            };
+
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+
+            axios.post(`${API_BASE_URL}/user/update-resume?id=${loggedUserId}`, { ...request_data, withCredentials: true }, config)
+                .then(res => {
+
+                    let status = res.data.status;
+
+                    if (status == "1") {
+                        setFormResumeResponse("RESUME UPDATED SUCCESSFULLY")
+                    } else {
+                        setFormResumeResponse("ERROR IN RESUME UPDATE OPERATION")
+                    }
+                });
+
+        } else {
+            // FILE INPUT IS NOT SET
+            setFormResumeResponse("File input is not set!");
+        }
+    };
+
+    // REQUEST DELETE RESUME
+
+    let requestDeleteResume = () => {
+
     };
 
     return (
@@ -369,9 +413,43 @@ function Settings({ loggedUserId }) {
                     {
                         displayChangeResume ?
 
-                            <p>Change resume here</p>
-                            : null
+                            <>
+                                <div className="form-item">
+                                    <input
+                                        type="file"
+                                        className="form-input"
+                                        accept=".pdf"
+                                        onChange={(e) => { setFormResumeFile(e.target.files[0]) }}
+                                    />
+
+                                    <input
+                                        type="submit"
+                                        value="Update resume"
+                                        className="form-input submit"
+                                        onClick={requestUpdateResume}
+                                    />
+                                </div>
+
+                                {
+                                    userResumeLink != "" &&
+                                    <div className="form-item">
+                                        <input
+                                            type="reset"
+                                            value="Delete resume"
+                                            className="form-input submit reset"
+                                            onClick={requestDeleteResume}
+                                        />
+                                    </div>
+                                }
+                            </>
+                            :
+                            null
+
                     }
+
+                    <p className="request-response">
+                        {formResumeResponse}
+                    </p>
                 </div>
 
             </div>

@@ -138,7 +138,7 @@
     opacity: .8;
 }
 
-.settings-section .form .form-input {
+.settings-section .form-input {
     padding: 5px;    
     width: 100%;
     margin-bottom: 15px;
@@ -148,7 +148,7 @@
     font-size: .9rem;
 }
 
-.settings-section .form .form-input.submit {
+.settings-section .form-input.submit {
     background-color: #3440adcc;
     color: #f9f9f9;
     text-transform: uppercase;
@@ -159,18 +159,27 @@
     transition-property: opacity;
 }
 
-.settings-section .form .form-input.submit.reset {
+.settings-section .form-input.submit.reset {
     background-color: #bd3636cc;
 }
 
-.settings-section .form .form-input.submit:hover {
+.settings-section .form-input.submit:hover {
     opacity: 1;
 }
 
-.settings-section .form .form-input.submit:active {
+.settings-section .form-input.submit:active {
     transform: scale(1.01);
 }
 
 .settings-section .request-response {
     color: #181818aa;
+}
+
+.settings-section.resume .form-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin-top: 20px;
 }
